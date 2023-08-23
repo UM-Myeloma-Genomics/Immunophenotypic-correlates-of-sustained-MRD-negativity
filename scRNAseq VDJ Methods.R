@@ -27,7 +27,8 @@ aggregate.chains = aggregate(data = clonotype.contigs, cdr3~SampleID+chain+barco
 vdj.matrix = pivot_wider(data = aggregate.chains, names_from = chain, values_from = cdr3, values_fill = "")
 
 # Mark multi-chain receptors (defined as a TCR or BCR with more than one chain of the same type)
-vdj.matrix$multi_chain = ifelse(grepl(vdj.matrix$TRB, pattern = ",") | grepl(vdj.matrix$TRA, pattern = ","), TRUE, FALSE)
+vdj.matrix$multi_chain = ifelse(grepl(vdj.matrix$IGH, pattern = ",") | grepl(vdj.matrix$IGK, pattern = ",") | grepl(vdj.matrix$IGL, pattern = ",") |
+                                  grepl(vdj.matrix$TRB, pattern = ",") | grepl(vdj.matrix$TRA, pattern = ","), TRUE, FALSE)
 
 # Mark dual receptors
 vdj.matrix$dualAlpha = ifelse(grepl(vdj.matrix$TRA, pattern = ","), TRUE, FALSE)
